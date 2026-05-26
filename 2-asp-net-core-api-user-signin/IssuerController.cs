@@ -46,19 +46,15 @@ namespace AspNetCoreVerifiableCredentials {
         private IssuanceRequest SetClaims( IssuanceRequest request ) {
             request.claims = new Dictionary<string, string>();
             //retrieve the claims to use as part of the payload to get a VC
-            string username = HttpContext.User.Claims.FirstOrDefault( c => c.Type == "preferred_username" )?.Value;
-            string name = HttpContext.User.Claims.FirstOrDefault( c => c.Type == "name" )?.Value;
             string given_name = HttpContext.User.Claims.FirstOrDefault( c => c.Type == ClaimTypes.GivenName )?.Value;
             string family_name = HttpContext.User.Claims.FirstOrDefault( c => c.Type == ClaimTypes.Surname )?.Value;
             string upn = HttpContext.User.Claims.FirstOrDefault( c => c.Type == ClaimTypes.Upn )?.Value
                 ?? HttpContext.User.Claims.FirstOrDefault( c => c.Type == "upn" )?.Value
                 ?? HttpContext.User.Claims.FirstOrDefault( c => c.Type == "preferred_username" )?.Value;
-            
-            request.claims.Add( "username", username );
-            request.claims.Add( "userPrincipalName", upn );
-            request.claims.Add( "name", name );
-            request.claims.Add( "given_name", given_name );
-            request.claims.Add( "family_name", family_name );
+
+            request.claims.Add( "firstName", given_name );
+            request.claims.Add( "lastName", family_name );
+            request.claims.Add( "revocationId", upn );
 
             string photoClaimName = "";
             // get photo claim from manifest
