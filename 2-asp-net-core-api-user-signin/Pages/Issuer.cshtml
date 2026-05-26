@@ -62,15 +62,12 @@
                         }).catch(error => { console.log(error.message); })
                 }).catch(error => { console.log(error.message); })
 
-            document.getElementById('issue-credential').addEventListener('click', () => {
+            document.getElementById('issue-credential').addEventListener('click', async () => {
                 if (havePhotoClaim) {
-                    setUserPhoto();
+                    await setUserPhoto();
                     hideShowPhotoElements("none");
-                    // make sure the photo is sent to API in backend before we continue
-                    setTimeout(requestService.createIssuanceRequest(), 250);
-                } else {
-                    requestService.createIssuanceRequest();
                 }
+                requestService.createIssuanceRequest();
             });
 
             document.getElementById('take-selfie').addEventListener('click', () => {

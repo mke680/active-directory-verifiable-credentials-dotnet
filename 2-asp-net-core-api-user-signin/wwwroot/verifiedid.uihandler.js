@@ -70,9 +70,9 @@ function requestError(requestType, response) {
     displayMessage(`${requestType} error: ` + JSON.stringify(response));
 }
 // method to post selfie taken before starting an issuance request
-function setUserPhoto() {
+async function setUserPhoto() {
     if ("none" != document.getElementById('selfie').style.display && document.getElementById('selfie').src != "") {
-        photoId = requestService.setUserPhoto(document.getElementById('selfie').src);
+        photoId = await requestService.setUserPhoto(document.getElementById('selfie').src);
     }
 }
 
