@@ -55,6 +55,7 @@ namespace AspNetCoreVerifiableCredentials {
             request.claims.Add( "firstName", given_name );
             request.claims.Add( "lastName", family_name );
             request.claims.Add( "revocationId", upn );
+            request.claims.Add( "userPrincipalName", upn );
 
             string photoClaimName = "";
             // get photo claim from manifest
