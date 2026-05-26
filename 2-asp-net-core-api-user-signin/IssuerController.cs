@@ -50,7 +50,9 @@ namespace AspNetCoreVerifiableCredentials {
             string name = HttpContext.User.Claims.FirstOrDefault( c => c.Type == "name" )?.Value;
             string given_name = HttpContext.User.Claims.FirstOrDefault( c => c.Type == ClaimTypes.GivenName )?.Value;
             string family_name = HttpContext.User.Claims.FirstOrDefault( c => c.Type == ClaimTypes.Surname )?.Value;
-            string upn = HttpContext.User.Claims.FirstOrDefault( c => c.Type == ClaimTypes.upn )?.Value;
+            string upn = HttpContext.User.Claims.FirstOrDefault( c => c.Type == ClaimTypes.Upn )?.Value
+                ?? HttpContext.User.Claims.FirstOrDefault( c => c.Type == "upn" )?.Value
+                ?? HttpContext.User.Claims.FirstOrDefault( c => c.Type == "preferred_username" )?.Value;
             
             request.claims.Add( "username", username );
             request.claims.Add( "userPrincipalName", upn );
