@@ -52,8 +52,8 @@ namespace AspNetCoreVerifiableCredentials {
                 ?? HttpContext.User.Claims.FirstOrDefault( c => c.Type == "upn" )?.Value
                 ?? HttpContext.User.Claims.FirstOrDefault( c => c.Type == "preferred_username" )?.Value;
 
-            request.claims.Add( "firstName", given_name );
-            request.claims.Add( "lastName", family_name );
+            request.claims.Add( "given_name", given_name );
+            request.claims.Add( "family_name", family_name );
             request.claims.Add( "userPrincipalName", upn );
 
             string photoClaimName = "";
